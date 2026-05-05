@@ -107,20 +107,88 @@ body {
   overflow: hidden;
 }
 
-/* Subtle radial glow behind logo */
+/* Halo principal pulsant */
 .hero::before {
   content: "";
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle,
+    rgba(201,168,76,.22) 0%,
+    rgba(201,168,76,.08) 35%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: pulse-halo 4s ease-in-out infinite;
   pointer-events: none;
+}
+
+/* Second anneau décalé */
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px; height: 1000px;
+  background: radial-gradient(circle,
+    rgba(201,168,76,.07) 0%,
+    transparent 60%
+  );
+  border-radius: 50%;
+  animation: pulse-halo 4s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes pulse-halo {
+  0%, 100% { opacity: 1;   transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: .55; transform: translate(-50%, -50%) scale(1.08); }
 }
 
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.2) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 100%);
+}
+
+/* Rayons de lumière (sunburst) */
+.hero-rays {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 900px; height: 900px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: spin-rays 30s linear infinite;
+  opacity: .18;
+}
+
+.hero-rays span {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 50%; height: 2px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, rgba(201,168,76,.9), transparent);
+}
+
+@keyframes spin-rays { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Particule lumineuse orbitante */
+.hero-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold-lt);
+  box-shadow: 0 0 16px 6px rgba(201,168,76,.6);
+  animation: orbit 6s linear infinite;
+  pointer-events: none;
+}
+
+.hero-orb:nth-child(2) { animation-duration: 9s; animation-delay: -3s; width: 5px; height: 5px; }
+.hero-orb:nth-child(3) { animation-duration: 12s; animation-delay: -6s; width: 4px; height: 4px; opacity: .7; }
+
+@keyframes orbit {
+  0%   { transform: translate(-50%, -50%) rotate(0deg)   translateX(180px) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg); }
 }
 
 .hero-content {
@@ -134,12 +202,21 @@ body {
 }
 
 .hero-logo {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--gold);
-  box-shadow: 0 0 40px rgba(201,168,76,.35);
+  box-shadow:
+    0 0 0 6px rgba(201,168,76,.12),
+    0 0 40px rgba(201,168,76,.5),
+    0 0 80px rgba(201,168,76,.2);
+  animation: logo-glow 4s ease-in-out infinite;
+}
+
+@keyframes logo-glow {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(201,168,76,.12), 0 0 40px rgba(201,168,76,.5),  0 0 80px rgba(201,168,76,.2); }
+  50%       { box-shadow: 0 0 0 10px rgba(201,168,76,.18), 0 0 60px rgba(201,168,76,.7), 0 0 120px rgba(201,168,76,.3); }
 }
 
 .hero-content h1 {

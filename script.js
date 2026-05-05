@@ -1,3 +1,14 @@
+// Sunburst rays
+const raysContainer = document.getElementById('heroRays');
+if (raysContainer) {
+  const count = 24;
+  for (let i = 0; i < count; i++) {
+    const ray = document.createElement('span');
+    ray.style.transform = `rotate(${(360 / count) * i}deg)`;
+    raysContainer.appendChild(ray);
+  }
+}
+
 // Mobile burger menu
 const burger = document.querySelector('.burger');
 const navLinks = document.querySelector('.nav-links');
