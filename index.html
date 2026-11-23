@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#c8102e">
 
 <title>BTB — Électricien à Saumur | Électricité, placo, climatisation réversible</title>
 <meta name="description" content="BTB, Boucher Travaux du Bâtiment : électricien à Saumur. Électricité générale, pose de placo et climatisation réversible pour particuliers et professionnels. Devis gratuit au 06 99 76 65 94.">
@@ -26,6 +28,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Applique le thème avant le premier rendu pour éviter tout clignotement -->
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('btb-theme');
+    var dark = saved ? saved === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
 
 <script type="application/ld+json">
 [
@@ -99,219 +115,349 @@
 </script>
 
 <style>
+/* ===== Thème clair (par défaut) ===== */
 :root{
   --red:#c8102e;
-  --red-dark:#a60d26;
-  --ink:#1c1c1c;
-  --ink-soft:#4a4a4a;
-  --ink-light:#6e6e6e;
+  --red-hover:#a60d26;
+  --red-tint:#fdeef0;
+  --red-text:#c8102e;
+
+  --ink:#16181d;
+  --ink-soft:#4b5058;
+  --ink-light:#71767f;
+
   --bg:#ffffff;
-  --bg-alt:#f4f4f4;
-  --border:#dedede;
-  --dark:#1c1c1c;
+  --bg-alt:#f5f6f7;
+  --surface:#ffffff;
+  --surface-2:#fafbfb;
+
+  --border:#e3e5e9;
+  --border-soft:#eef0f2;
+  --border-strong:#cfd3d9;
+
+  --bar:#16181d;
+  --bar-ink:#d8dade;
+  --footer:#16181d;
+  --footer-ink:#b7babf;
+  --footer-line:#2d3036;
+
+  --shadow:0 1px 2px rgba(16,18,29,.04), 0 3px 10px rgba(16,18,29,.045);
+  --shadow-lift:0 2px 4px rgba(16,18,29,.06), 0 10px 24px rgba(16,18,29,.08);
+
+  --r:6px;
+  --r-sm:4px;
+}
+
+/* ===== Thème sombre ===== */
+html[data-theme="dark"]{
+  --red:#e0243f;
+  --red-hover:#f03b55;
+  --red-tint:rgba(224,36,63,.14);
+  --red-text:#ff6076;
+
+  --ink:#eceef1;
+  --ink-soft:#a9aeb7;
+  --ink-light:#868c95;
+
+  --bg:#121317;
+  --bg-alt:#17191e;
+  --surface:#1a1c22;
+  --surface-2:#1f2229;
+
+  --border:#2b2e36;
+  --border-soft:#24272e;
+  --border-strong:#3b3f48;
+
+  --bar:#0d0e11;
+  --bar-ink:#b9bcc2;
+  --footer:#0d0e11;
+  --footer-ink:#a4a8af;
+  --footer-line:#24262b;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 3px 10px rgba(0,0,0,.3);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.45), 0 10px 26px rgba(0,0,0,.4);
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
-  font-family:'Inter',Arial,Helvetica,sans-serif;
+  font-family:'Inter',system-ui,-apple-system,Arial,sans-serif;
   font-size:16px;
   line-height:1.65;
   color:var(--ink);
   background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Transitions activées après le premier rendu */
+.theme-ready body,
+.theme-ready .infobar,
+.theme-ready header,
+.theme-ready .hero,
+.theme-ready .section-alt,
+.theme-ready .service,
+.theme-ready .step,
+.theme-ready .devis-box,
+.theme-ready .contact-list li,
+.theme-ready .hours,
+.theme-ready .hours h3,
+.theme-ready .hours td,
+.theme-ready footer{
+  transition:background-color .18s ease, border-color .18s ease, color .18s ease;
 }
 
 img{max-width:100%;display:block}
 a{color:inherit}
 
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
 .container{max-width:1140px;margin:0 auto;padding:0 24px}
 
-h1,h2,h3,h4{line-height:1.2;font-weight:700;letter-spacing:-.01em}
-h1{font-size:40px;margin-bottom:18px}
-h2{font-size:30px;margin-bottom:14px}
+h1,h2,h3,h4{line-height:1.22;font-weight:700;letter-spacing:-.015em}
+h1{font-size:42px;margin-bottom:18px}
+h2{font-size:31px;margin-bottom:14px}
 h3{font-size:19px;margin-bottom:10px}
 p{margin-bottom:14px}
 p:last-child{margin-bottom:0}
 
 /* ===== Bandeau d'information ===== */
-.infobar{
-  background:var(--dark);
-  color:#dcdcdc;
-  font-size:13.5px;
-}
+.infobar{background:var(--bar);color:var(--bar-ink);font-size:13.5px}
 .infobar .container{
   display:flex;justify-content:space-between;align-items:center;
-  gap:20px;min-height:40px;flex-wrap:wrap;
+  gap:20px;min-height:42px;flex-wrap:wrap;
 }
 .infobar span{display:inline-flex;align-items:center;gap:7px}
-.infobar svg{opacity:.75}
+.infobar svg{opacity:.7}
 .infobar a{color:#fff;text-decoration:none;font-weight:600}
 .infobar a:hover{text-decoration:underline}
 
 /* ===== En-tête ===== */
 header{
-  background:#fff;
+  background:var(--surface);
   border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:100;
 }
+header.scrolled{box-shadow:var(--shadow)}
 header .container{
   display:flex;align-items:center;justify-content:space-between;
-  gap:24px;min-height:84px;
+  gap:20px;min-height:84px;
 }
 
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo-mark{
   width:48px;height:48px;background:var(--red);color:#fff;
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:17px;letter-spacing:.5px;
+  font-weight:700;font-size:17px;letter-spacing:.5px;border-radius:var(--r-sm);
 }
 .logo-name{font-size:19px;font-weight:700;letter-spacing:.04em;line-height:1.1}
-.logo-tag{font-size:11.5px;color:var(--ink-light);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.logo-tag{
+  font-size:11.5px;color:var(--ink-light);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:2px;white-space:nowrap;
+}
 
-nav ul{display:flex;gap:28px;list-style:none}
+nav ul{display:flex;gap:24px;list-style:none}
 nav a{
   text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-soft);
-  padding:6px 0;border-bottom:2px solid transparent;
+  padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap;
+  transition:color .15s,border-color .15s;
 }
-nav a:hover{color:var(--red);border-bottom-color:var(--red)}
+nav a:hover{color:var(--red-text);border-bottom-color:var(--red)}
+
+.header-tools{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.header-tools .btn-red{white-space:nowrap}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:9px;
   font-size:15px;font-weight:600;text-decoration:none;
-  padding:13px 22px;border:2px solid transparent;cursor:pointer;
-  font-family:inherit;
+  padding:13px 22px;border:1.5px solid transparent;cursor:pointer;
+  font-family:inherit;border-radius:var(--r);
+  transition:background-color .16s,border-color .16s,color .16s,transform .12s;
 }
+.btn:active{transform:translateY(1px)}
 .btn-red{background:var(--red);color:#fff;border-color:var(--red)}
-.btn-red:hover{background:var(--red-dark);border-color:var(--red-dark)}
-.btn-outline{background:#fff;color:var(--ink);border-color:#c4c4c4}
-.btn-outline:hover{border-color:var(--ink);}
+.btn-red:hover{background:var(--red-hover);border-color:var(--red-hover)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--border-strong)}
+.btn-outline:hover{border-color:var(--ink);background:var(--surface-2)}
 .btn-lg{padding:15px 28px;font-size:16px}
 
-.menu-toggle{
-  display:none;background:none;border:1px solid var(--border);
-  padding:9px 11px;cursor:pointer;
+/* Bouton jour / nuit */
+.theme-btn{
+  width:42px;height:42px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:transparent;color:var(--ink-soft);
+  border:1.5px solid var(--border);border-radius:var(--r);
+  cursor:pointer;transition:color .16s,border-color .16s,background-color .16s;
 }
-.menu-toggle span{display:block;width:20px;height:2px;background:var(--ink);margin:4px 0}
+.theme-btn:hover{color:var(--red-text);border-color:var(--border-strong)}
+.theme-btn .moon{display:none}
+html[data-theme="dark"] .theme-btn .sun{display:none}
+html[data-theme="dark"] .theme-btn .moon{display:block}
+
+.menu-toggle{
+  display:none;background:transparent;color:var(--ink);
+  border:1.5px solid var(--border);border-radius:var(--r);
+  width:42px;height:42px;cursor:pointer;
+}
+.menu-toggle span{display:block;width:18px;height:2px;background:currentColor;margin:4px auto;border-radius:2px}
 
 /* ===== Accroche ===== */
-.hero{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:64px 0}
+.hero{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:68px 0}
 .hero .container{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start}
 .hero .kicker{
-  font-size:13px;font-weight:600;color:var(--red);
+  font-size:13px;font-weight:600;color:var(--red-text);
   text-transform:uppercase;letter-spacing:.09em;margin-bottom:14px;
 }
 .hero p{font-size:17.5px;color:var(--ink-soft);max-width:560px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 
-.hero-points{list-style:none;margin-top:28px;display:grid;gap:9px}
-.hero-points li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft)}
-.hero-points svg{color:var(--red);flex-shrink:0;margin-top:4px}
+.hero-points{list-style:none;margin-top:26px;display:grid;gap:10px}
+.hero-points li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft)}
+.hero-points svg{color:var(--red-text);flex-shrink:0;margin-top:4px}
 
-.devis-box{background:#fff;border:1px solid var(--border);padding:28px}
+.devis-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px;box-shadow:var(--shadow);
+}
 .devis-box h2{font-size:20px;margin-bottom:6px}
 .devis-box > p{font-size:14.5px;color:var(--ink-light);margin-bottom:20px}
-.devis-row{display:flex;gap:12px;padding:13px 0;border-top:1px solid #ececec;font-size:15px}
-.devis-row svg{color:var(--red);flex-shrink:0;margin-top:4px}
+.devis-row{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--border-soft);font-size:15px}
+.devis-row svg{color:var(--red-text);flex-shrink:0;margin-top:4px}
 .devis-row dt{font-size:12.5px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.05em}
 .devis-row dd{font-weight:600}
 .devis-row dd a{text-decoration:none}
-.devis-row dd a:hover{color:var(--red)}
+.devis-row dd a:hover{color:var(--red-text)}
 .devis-box .btn{width:100%;margin-top:22px}
 
 /* ===== Sections ===== */
-section{padding:72px 0}
+section{padding:76px 0}
 .section-alt{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.section-head{max-width:720px;margin-bottom:40px}
+.section-head{max-width:720px;margin-bottom:42px}
 .section-head p{color:var(--ink-soft);font-size:16.5px}
-.rule{width:52px;height:3px;background:var(--red);margin-bottom:20px}
+.rule{width:52px;height:3px;background:var(--red);margin-bottom:20px;border-radius:2px}
 
 /* ===== Prestations ===== */
 .services{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.service{background:#fff;border:1px solid var(--border);padding:30px 26px}
-.section-alt .service{background:#fff}
+.service{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:30px 26px;box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.service:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--border-strong)}
 .service-icon{
-  width:46px;height:46px;background:#fdeef0;color:var(--red);
+  width:48px;height:48px;background:var(--red-tint);color:var(--red-text);
   display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  border-radius:var(--r);
 }
 .service p{color:var(--ink-soft);font-size:15px}
-.service ul{list-style:none;margin-top:16px;padding-top:16px;border-top:1px solid #ececec;display:grid;gap:7px}
-.service li{font-size:14.5px;color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.5}
+.service ul{list-style:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border-soft);display:grid;gap:8px}
+.service li{font-size:14.5px;color:var(--ink-soft);padding-left:17px;position:relative;line-height:1.5}
 .service li::before{
-  content:"";position:absolute;left:0;top:9px;
-  width:6px;height:6px;background:var(--red);
+  content:"";position:absolute;left:0;top:8px;
+  width:6px;height:6px;background:var(--red);border-radius:50%;
 }
 
-/* ===== Atouts ===== */
+/* ===== L'entreprise ===== */
 .two-col{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
 .checklist{list-style:none;display:grid;gap:18px}
 .checklist li{display:flex;gap:14px;align-items:flex-start}
 .check{
-  width:26px;height:26px;background:var(--red);color:#fff;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;margin-top:2px;
+  width:27px;height:27px;background:var(--red);color:#fff;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;margin-top:2px;border-radius:var(--r-sm);
 }
 .checklist h3{font-size:16.5px;margin-bottom:3px}
 .checklist p{font-size:14.5px;color:var(--ink-soft)}
 
 /* ===== Déroulement ===== */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-.step{background:#fff;border:1px solid var(--border);padding:26px 22px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.step{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:26px 22px;box-shadow:var(--shadow);
+}
 .step-num{
-  width:34px;height:34px;background:var(--red);color:#fff;
+  width:36px;height:36px;background:var(--red);color:#fff;
   display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:15px;margin-bottom:16px;
+  font-weight:700;font-size:15px;margin-bottom:16px;border-radius:var(--r-sm);
 }
 .step h3{font-size:17px}
 .step p{font-size:14.5px;color:var(--ink-soft)}
 
 /* ===== Zone ===== */
-.communes{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:10px 24px;margin-top:8px}
-.communes li{
-  font-size:15px;color:var(--ink-soft);padding-left:16px;position:relative;
-}
-.communes li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:1.5px;background:var(--red)}
-.zone-note{margin-top:26px;font-size:15px;color:var(--ink-light)}
+.communes{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:11px 24px;margin-top:8px}
+.communes li{font-size:15px;color:var(--ink-soft);padding-left:17px;position:relative}
+.communes li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--red);border-radius:2px}
+.zone-note{margin-top:28px;font-size:15px;color:var(--ink-light)}
 
 /* ===== Contact ===== */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.contact-list{list-style:none;display:grid;gap:2px;background:var(--border);border:1px solid var(--border)}
-.contact-list li{background:#fff}
-.contact-list a,.contact-list div{
-  display:flex;gap:14px;align-items:flex-start;padding:20px 22px;text-decoration:none;
+.contact-list{
+  list-style:none;border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;box-shadow:var(--shadow);
 }
-.contact-list a:hover{background:#fafafa}
-.contact-list svg{color:var(--red);flex-shrink:0;margin-top:4px}
+.contact-list li{background:var(--surface);border-bottom:1px solid var(--border-soft)}
+.contact-list li:last-child{border-bottom:0}
+.contact-list a{
+  display:flex;gap:14px;align-items:flex-start;padding:20px 22px;text-decoration:none;
+  transition:background-color .15s;
+}
+.contact-list a:hover{background:var(--surface-2)}
+.contact-list svg{color:var(--red-text);flex-shrink:0;margin-top:4px}
 .contact-k{display:block;font-size:12.5px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.05em}
 .contact-v{display:block;font-weight:600;font-size:16px;line-height:1.45}
 
-.hours{border:1px solid var(--border)}
-.hours h3{padding:18px 22px;border-bottom:1px solid var(--border);margin:0;font-size:16px;background:#fafafa}
-.hours table{width:100%;border-collapse:collapse}
-.hours td{padding:13px 22px;font-size:15px;border-bottom:1px solid #ececec}
+.hours{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.hours h3{
+  padding:17px 22px;border-bottom:1px solid var(--border);margin:0;
+  font-size:16px;background:var(--surface-2);
+}
+.hours table{width:100%;border-collapse:collapse;background:var(--surface)}
+.hours td{padding:13px 22px;font-size:15px;border-bottom:1px solid var(--border-soft)}
 .hours tr:last-child td{border-bottom:0}
 .hours td:last-child{text-align:right;font-weight:600}
 .hours .closed{color:var(--ink-light);font-weight:500}
 
 /* ===== Pied de page ===== */
-footer{background:var(--dark);color:#bdbdbd;padding:56px 0 0;font-size:14.5px}
+footer{background:var(--footer);color:var(--footer-ink);padding:60px 0 0;font-size:14.5px}
 footer .f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:40px}
 footer h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px}
 footer p{line-height:1.7}
 footer ul{list-style:none;display:grid;gap:9px}
-footer a{color:#bdbdbd;text-decoration:none}
+footer a{color:var(--footer-ink);text-decoration:none}
 footer a:hover{color:#fff;text-decoration:underline}
 .f-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .f-logo .logo-name{color:#fff}
-.f-logo .logo-tag{color:#9a9a9a}
+.f-logo .logo-tag{color:#8b8f96}
 .f-bottom{
-  border-top:1px solid #333;padding:20px 0;
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;color:#8f8f8f;
+  border-top:1px solid var(--footer-line);padding:20px 0;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-size:13px;color:#83878e;
 }
 
 /* ===== Barre d'appel mobile ===== */
 .callbar{display:none}
 
 /* ===== Responsive ===== */
+/* En-tête serré : le bouton téléphone passe en icône seule */
+@media (max-width:1120px){
+  nav ul{gap:20px}
+  .header-tools .btn-red .btn-tel{display:none}
+  .header-tools .btn-red{padding:13px 15px}
+}
+
 @media (max-width:980px){
+  /* Le menu complet ne tient plus en largeur : passage au menu déroulant */
+  .menu-toggle{display:block}
+  nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    box-shadow:var(--shadow);
+  }
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:0;padding:8px 24px 16px}
+  nav a{display:block;padding:14px 0;border-bottom:1px solid var(--border-soft);font-size:16px}
+  nav a:hover{border-bottom-color:var(--border-soft)}
+
   .hero .container{grid-template-columns:1fr;gap:36px}
   .services{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr 1fr}
@@ -321,23 +467,17 @@ footer a:hover{color:#fff;text-decoration:underline}
 }
 
 @media (max-width:760px){
-  h1{font-size:31px}
+  h1{font-size:32px}
   h2{font-size:25px}
-  .infobar .container{justify-content:center;text-align:center;padding-top:7px;padding-bottom:7px}
+  .infobar .container{justify-content:center;text-align:center;padding-top:8px;padding-bottom:8px}
   .infobar .hide-sm{display:none}
-  header .container{min-height:72px}
-  .menu-toggle{display:block}
-  nav{
-    display:none;position:absolute;top:100%;left:0;right:0;
-    background:#fff;border-bottom:1px solid var(--border);
-  }
-  nav.open{display:block}
-  nav ul{flex-direction:column;gap:0;padding:8px 24px 16px}
-  nav a{display:block;padding:13px 0;border-bottom:1px solid #ececec;font-size:16px}
-  nav a:hover{border-bottom-color:#ececec}
-  header .btn{display:none}
-  .hero{padding:44px 0}
-  section{padding:52px 0}
+  header .container{min-height:72px;gap:12px}
+  .logo-mark{width:44px;height:44px;font-size:16px}
+  .logo-name{font-size:17px}
+  .logo-tag{white-space:normal;font-size:10.5px;letter-spacing:.03em;line-height:1.3}
+  .header-tools .btn-red{display:none}
+  .hero{padding:46px 0}
+  section{padding:54px 0}
   .services{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr;gap:28px}
@@ -348,14 +488,20 @@ footer a:hover{color:#fff;text-decoration:underline}
 
   .callbar{
     display:flex;position:fixed;bottom:0;left:0;right:0;z-index:200;
-    border-top:1px solid rgba(0,0,0,.1);
+    box-shadow:0 -2px 12px rgba(0,0,0,.18);
   }
   .callbar a{
     flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
-    padding:14px 8px;text-decoration:none;font-weight:600;font-size:15px;color:#fff;
+    padding:15px 8px;text-decoration:none;font-weight:600;font-size:15px;color:#fff;
   }
   .callbar .call{background:var(--red)}
   .callbar .wa{background:#1f8f4e}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+  .service:hover{transform:none}
 }
 </style>
 </head>
@@ -376,7 +522,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 </div>
 
 <!-- En-tête -->
-<header>
+<header id="header">
   <div class="container">
     <a href="#" class="logo">
       <div class="logo-mark">BTB</div>
@@ -391,19 +537,26 @@ footer a:hover{color:#fff;text-decoration:underline}
         <li><a href="#prestations">Prestations</a></li>
         <li><a href="#atouts">L'entreprise</a></li>
         <li><a href="#deroulement">Déroulement</a></li>
-        <li><a href="#zone">Zone d'intervention</a></li>
+        <li><a href="#zone">Zone</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
-    <a href="tel:+33699766594" class="btn btn-red">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      06 99 76 65 94
-    </a>
+    <div class="header-tools">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Basculer entre le thème clair et sombre" title="Thème clair / sombre">
+        <svg class="sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2 12h2.6M19.4 12H22M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9"/></svg>
+        <svg class="moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+      <a href="tel:+33699766594" class="btn btn-red">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="btn-tel">06 99 76 65 94</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -420,15 +573,15 @@ footer a:hover{color:#fff;text-decoration:underline}
       </p>
       <ul class="hero-points">
         <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
           Devis gratuit et détaillé avant le début des travaux
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
           Installations conformes à la norme NF C 15-100
         </li>
         <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
           Un seul interlocuteur, de la visite à la fin du chantier
         </li>
       </ul>
@@ -484,7 +637,7 @@ footer a:hover{color:#fff;text-decoration:underline}
     <div class="services">
       <article class="service">
         <div class="service-icon">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <h3>Électricité générale</h3>
         <p>
@@ -503,7 +656,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 
       <article class="service">
         <div class="service-icon">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><path d="M3 9h18M3 15h18M10.5 3v6M13.5 9v6M10.5 15v6"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M10.5 3v6M13.5 9v6M10.5 15v6"/></svg>
         </div>
         <h3>Placo et plâtrerie</h3>
         <p>
@@ -522,7 +675,7 @@ footer a:hover{color:#fff;text-decoration:underline}
 
       <article class="service">
         <div class="service-icon">
-          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="2" y="4" width="20" height="9"/><path d="M5.5 8.5h13M7 17c0 1.4 .9 2.4 1.8 3M12 17c0 1.4 .9 2.4 1.8 3M17 17c0 1.4-.9 2.4-1.8 3"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="2" y="4" width="20" height="9" rx="1.5"/><path d="M5.5 8.5h13M7 17c0 1.4 .9 2.4 1.8 3M12 17c0 1.4 .9 2.4 1.8 3M17 17c0 1.4-.9 2.4-1.8 3"/></svg>
         </div>
         <h3>Climatisation réversible</h3>
         <p>
@@ -565,35 +718,35 @@ footer a:hover{color:#fff;text-decoration:underline}
 
     <ul class="checklist">
       <li>
-        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <div>
           <h3>Devis gratuit et détaillé</h3>
           <p>Chaque poste est chiffré ligne par ligne. Le montant est arrêté avant le démarrage du chantier.</p>
         </div>
       </li>
       <li>
-        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <div>
           <h3>Travaux aux normes</h3>
           <p>Les installations électriques sont réalisées selon la norme NF C 15-100, avec du matériel certifié.</p>
         </div>
       </li>
       <li>
-        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <div>
           <h3>Délais annoncés et respectés</h3>
           <p>Une date de début et une durée estimée dès le devis. En cas d'imprévu, vous êtes prévenu aussitôt.</p>
         </div>
       </li>
       <li>
-        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <div>
           <h3>Chantier laissé propre</h3>
           <p>Protection des sols et du mobilier, évacuation des gravats et nettoyage en fin d'intervention.</p>
         </div>
       </li>
       <li>
-        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <div>
           <h3>Particuliers et professionnels</h3>
           <p>Maisons, appartements et locaux professionnels, en neuf comme en rénovation.</p>
@@ -643,9 +796,7 @@ footer a:hover{color:#fff;text-decoration:underline}
     <div class="section-head">
       <div class="rule"></div>
       <h2>Zone d'intervention</h2>
-      <p>
-        BTB intervient à Saumur et dans les communes environnantes, en Maine-et-Loire (49).
-      </p>
+      <p>BTB intervient à Saumur et dans les communes environnantes, en Maine-et-Loire (49).</p>
     </div>
 
     <ul class="communes">
@@ -675,9 +826,7 @@ footer a:hover{color:#fff;text-decoration:underline}
     <div class="section-head">
       <div class="rule"></div>
       <h2>Contact</h2>
-      <p>
-        Pour un devis ou un simple renseignement, le plus rapide reste le téléphone.
-      </p>
+      <p>Pour un devis ou un simple renseignement, le plus rapide reste le téléphone.</p>
     </div>
 
     <div class="contact-grid">
@@ -797,18 +946,68 @@ footer a:hover{color:#fff;text-decoration:underline}
 </div>
 
 <script>
+(function () {
+  var root = document.documentElement;
+
+  /* --- Thème clair / sombre --- */
+  var themeBtn = document.getElementById('themeBtn');
+  var themeColor = document.querySelector('meta[name="theme-color"]');
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    if (themeColor) {
+      themeColor.setAttribute('content', theme === 'dark' ? '#0d0e11' : '#c8102e');
+    }
+  }
+
+  themeBtn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('btb-theme', next); } catch (e) {}
+  });
+
+  /* Suit le réglage du système tant que rien n'a été choisi à la main */
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  mq.addEventListener('change', function (e) {
+    var saved = null;
+    try { saved = localStorage.getItem('btb-theme'); } catch (err) {}
+    if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+  });
+
+  /* Transitions de couleur seulement après le premier rendu */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { root.classList.add('theme-ready'); });
+  });
+
+  /* --- Menu mobile --- */
   var toggle = document.getElementById('menuToggle');
   var nav = document.getElementById('nav');
+
   toggle.addEventListener('click', function () {
     var open = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
+
   nav.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       nav.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  /* --- Ombre de l'en-tête au défilement --- */
+  var header = document.getElementById('header');
+  var ticking = false;
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+      ticking = false;
+    });
+  }, { passive: true });
+})();
 </script>
 
 </body>
