@@ -206,6 +206,39 @@
   }
   .metric-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 
+  /* ── BANDE DE CONFIANCE (logos clients) ── */
+  .trust{padding:54px 60px;border-bottom:1px solid var(--line);background:var(--white)}
+  .trust-label{
+    text-align:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--blue);margin-bottom:34px;
+  }
+  .trust-logos{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:24px 56px;max-width:1120px;margin:0 auto;
+  }
+  .logo-item{
+    height:54px;display:flex;align-items:center;justify-content:center;
+    text-decoration:none;color:inherit;
+  }
+  /* Le fichier existe : le logo s'affiche. Sinon l'image est retirée et
+     le nom en toutes lettres prend sa place (voir logos/README.md). */
+  .logo-item img{
+    max-height:54px;max-width:168px;width:auto;object-fit:contain;
+    filter:grayscale(1);opacity:.58;transition:filter .3s,opacity .3s;
+  }
+  .logo-item:hover img{filter:none;opacity:1}
+  .logo-name{
+    font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.08em;
+    color:var(--ink-2);opacity:.75;text-align:center;line-height:1.1;
+    transition:opacity .3s,color .3s;
+  }
+  .logo-item:hover .logo-name{opacity:1;color:var(--blue)}
+  .logo-item img ~ .logo-name{display:none}
+  .trust-note{
+    text-align:center;font-size:13.5px;line-height:1.7;color:var(--ink-3);
+    font-weight:300;max-width:720px;margin:34px auto 0;
+  }
+
   /* ── MARQUEE ── */
   .marquee-section{
     border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -265,22 +298,6 @@
   .tag{
     font-size:10px;letter-spacing:.12em;text-transform:uppercase;
     border:1px solid var(--line);padding:5px 11px;color:var(--ink-3);border-radius:2px;
-  }
-
-  /* ── RÉFÉRENCES ── */
-  .refs-intro{
-    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:60px;
-  }
-  .refs-intro p{font-size:16px;line-height:1.8;color:var(--ink-2);font-weight:300;align-self:end}
-
-  .refs-list{display:flex;flex-wrap:wrap;gap:12px}
-  .ref-pill{
-    font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;
-    padding:14px 28px;border:1px solid var(--line);border-radius:100px;
-    background:var(--white);transition:all .3s;
-  }
-  .ref-pill:hover{
-    background:var(--blue);color:#fff;border-color:var(--blue);transform:scale(1.04);
   }
 
   /* ── MÉTHODE ── */
@@ -415,7 +432,11 @@
     h1{font-size:clamp(50px,13vw,74px)}
 
     .section{padding:72px 22px}
-    .refs-intro{grid-template-columns:1fr;gap:28px}
+    .trust{padding:40px 22px}
+    .trust-logos{gap:20px 34px}
+    .logo-item{height:42px}
+    .logo-item img{max-height:42px;max-width:124px}
+    .logo-name{font-size:17px}
     .about-grid{grid-template-columns:1fr;gap:36px}
     .process-steps{grid-template-columns:1fr 1fr;gap:38px 0}
     .process-steps::before{display:none}
@@ -431,7 +452,7 @@
 
   @media (max-width:560px){
     .process-steps{grid-template-columns:1fr}
-    .ref-pill{font-size:18px;padding:11px 20px}
+    .trust-logos{gap:18px 26px}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -494,6 +515,44 @@
       <div class="metric-label">Sevran · Île-de-France</div>
     </div>
   </div>
+</section>
+
+<!-- ILS NOUS ONT FAIT CONFIANCE -->
+<section class="trust" id="references">
+  <p class="trust-label">Ils nous ont fait confiance</p>
+
+  <div class="trust-logos">
+    <div class="logo-item">
+      <img src="logos/sncf.png" alt="SNCF" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">SNCF</span>
+    </div>
+    <div class="logo-item">
+      <img src="logos/gendarmerie.png" alt="Gendarmerie nationale" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">Gendarmerie</span>
+    </div>
+    <div class="logo-item">
+      <img src="logos/assemblee-nationale.png" alt="Assemblée nationale" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">Assemblée<br>nationale</span>
+    </div>
+    <div class="logo-item">
+      <img src="logos/ministeres.png" alt="Ministères" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">Ministères</span>
+    </div>
+    <div class="logo-item">
+      <img src="logos/services-etat.png" alt="Services de l'État" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">Services<br>de l'État</span>
+    </div>
+    <div class="logo-item">
+      <img src="logos/groupe-balas.png" alt="Groupe Balas" loading="lazy" onerror="this.remove()">
+      <span class="logo-name">Groupe Balas</span>
+    </div>
+  </div>
+
+  <p class="trust-note">
+    BDS Service intervient pour des donneurs d'ordre publics et privés, sur des sites
+    sensibles comme sur des chantiers de rénovation classiques — avec les exigences de
+    sécurité, de propreté et de tenue des délais que cela suppose.
+  </p>
 </section>
 
 <!-- MARQUEE -->
@@ -586,29 +645,8 @@
   </div>
 </section>
 
-<!-- RÉFÉRENCES -->
-<section class="section section-soft" id="references">
-  <div class="section-label"><span>Références</span></div>
-  <div class="refs-intro">
-    <h2>ILS NOUS FONT<br><span class="outline">CONFIANCE</span></h2>
-    <p>
-      BDS Service intervient pour des donneurs d'ordre publics et privés, sur des sites
-      sensibles comme sur des chantiers de rénovation classiques — avec les exigences
-      de sécurité, de propreté et de tenue des délais que cela suppose.
-    </p>
-  </div>
-  <div class="refs-list fade-up">
-    <div class="ref-pill">SNCF</div>
-    <div class="ref-pill">Gendarmerie</div>
-    <div class="ref-pill">Services de l'État</div>
-    <div class="ref-pill">Ministères</div>
-    <div class="ref-pill">Assemblée nationale</div>
-    <div class="ref-pill">Groupe Balas — Gennevilliers</div>
-  </div>
-</section>
-
 <!-- MÉTHODE -->
-<section class="section" id="methode">
+<section class="section section-soft" id="methode">
   <div class="section-label"><span>Notre méthode</span></div>
   <h2>CLAIRE.<br><span class="outline">RIGOUREUSE.</span><br>TENUE.</h2>
 
@@ -649,7 +687,7 @@
 </section>
 
 <!-- ENTREPRISE -->
-<section class="section section-soft" id="entreprise">
+<section class="section" id="entreprise">
   <div class="section-label"><span>L'entreprise</span></div>
   <div class="about-grid">
     <div>
