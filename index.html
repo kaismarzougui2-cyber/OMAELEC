@@ -300,6 +300,23 @@
     border:1px solid var(--line);padding:5px 11px;color:var(--ink-3);border-radius:2px;
   }
 
+  /* ── RÉALISATIONS ── */
+  .gallery{display:flex;flex-wrap:wrap;gap:22px;margin-top:56px}
+  .shot{
+    border:1px solid var(--line);background:var(--white);
+    display:flex;flex-direction:column;min-width:200px;
+  }
+  .shot-img{
+    height:240px;overflow:hidden;background:#e9edf2;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .shot img{height:240px;width:auto;display:block;transition:transform .5s ease}
+  .shot:hover img{transform:scale(1.04)}
+  .shot figcaption{
+    padding:14px 18px;border-top:1px solid var(--line);
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  }
+
   /* ── MÉTHODE ── */
   .process-steps{
     display:grid;grid-template-columns:repeat(4,1fr);margin-top:70px;position:relative;
@@ -412,7 +429,8 @@
     .services-grid{grid-template-columns:1fr}
   }
 
-  @media (max-width:900px){
+  /* 1000px et non 900 : à six entrées, le menu complet passe sur deux lignes */
+  @media (max-width:1000px){
     nav{padding:14px 22px}
     .nav-links{
       display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
@@ -475,6 +493,7 @@
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#metiers">Métiers</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
     <li><a href="#references">Références</a></li>
     <li><a href="#methode">Méthode</a></li>
     <li><a href="#entreprise">Entreprise</a></li>
@@ -645,8 +664,34 @@
   </div>
 </section>
 
+<!-- RÉALISATIONS -->
+<section class="section section-soft" id="realisations">
+  <div class="section-label"><span>Nos réalisations</span></div>
+  <h2>SUR LE<br><span class="outline">TERRAIN</span></h2>
+
+  <div class="gallery fade-up">
+    <figure class="shot">
+      <div class="shot-img">
+        <img src="photos/chaufferie-gaz.jpg"
+             alt="Chaufferie gaz : deux chaudières et réseau de distribution en local technique"
+             loading="lazy">
+      </div>
+      <figcaption>Chaufferie gaz — installation</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <div class="shot-img">
+        <img src="photos/chauffe-eau.jpg"
+             alt="Chauffe-eau électrique posé et raccordé sur mur de local technique"
+             loading="lazy">
+      </div>
+      <figcaption>Chauffe-eau — pose et raccordement</figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- MÉTHODE -->
-<section class="section section-soft" id="methode">
+<section class="section" id="methode">
   <div class="section-label"><span>Notre méthode</span></div>
   <h2>CLAIRE.<br><span class="outline">RIGOUREUSE.</span><br>TENUE.</h2>
 
@@ -687,7 +732,7 @@
 </section>
 
 <!-- ENTREPRISE -->
-<section class="section" id="entreprise">
+<section class="section section-soft" id="entreprise">
   <div class="section-label"><span>L'entreprise</span></div>
   <div class="about-grid">
     <div>
